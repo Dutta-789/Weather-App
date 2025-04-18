@@ -65,7 +65,7 @@ settingsBtn.addEventListener('click', () => {
 
 async function setBackgroundImage(keyword) {
   try {
-    const response = await fetch(`http://localhost:3000/image?query=${encodeURIComponent(keyword)}`);
+    const response = await fetch(`https://weather-app-cf6d.onrender.com/image?query=${encodeURIComponent(keyword)}`);
     const data = await response.json();
 
     if (data.hits && data.hits.length > 0) {
@@ -172,7 +172,7 @@ function getLocation() {
       <strong>Longitude:</strong> ${lon}
     `;
     try{
-      const weather=await fetch(`http://localhost:3000/weather?lat=${lat}&lon=${lon}`);
+      const weather=await fetch(`https://weather-app-cf6d.onrender.com/weather?lat=${lat}&lon=${lon}`);
       const data=await weather.json();
       currentWeather(data.current);
       location_name(data.location);

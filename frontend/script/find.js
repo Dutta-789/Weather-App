@@ -99,7 +99,7 @@ function printForecast(timeArray){
 //setting the background image
 async function setBackgroundImage(keyword) {
     try {
-      const response = await fetch(`http://localhost:3000/image?query=${encodeURIComponent(keyword)}`);
+      const response = await fetch(`https://weather-app-cf6d.onrender.com/image?query=${encodeURIComponent(keyword)}`);
       const data = await response.json();
   
       if (data.hits && data.hits.length > 0) {
@@ -123,7 +123,7 @@ async function setBackgroundImage(keyword) {
 async function getLocation(){
     const query = location_search.value;
     if (query.length < 3) return;              
-    const response = await axios.get(`http://localhost:3000/map?query=${query}`);
+    const response = await axios.get(`https://weather-app-cf6d.onrender.com/map?query=${query}`);
     const results = response.data.features;   
     suggestions.innerHTML="";              
     results.forEach(result => 
@@ -156,7 +156,7 @@ async function getWeather(result){
     marker = L.marker(coordinates).addTo(map);
 
     try{
-      const weather=await fetch(`http://localhost:3000/weather?lat=${coordinates[0]}&lon=${coordinates[1]}`);
+      const weather=await fetch(`https://weather-app-cf6d.onrender.com/weather?lat=${coordinates[0]}&lon=${coordinates[1]}`);
       const data=await weather.json();
       const temperature_c=data.current.temp_c;
       const icon=`https:${data.current.condition.icon}`;
