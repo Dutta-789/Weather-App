@@ -1,0 +1,249 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Monda:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+*{
+    font-family: "Monda", sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    
+    background: url('../assets/icon_images/cloudy_weather.jpg.jpg') no-repeat center center fixed;
+    background-size: cover;  /* Ensures the image covers the full screen */
+    transition: background-image 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 1;
+    
+    transition: opacity 0.5s ease;
+}
+body.fade-out {
+    opacity: 0;
+}
+main{
+    position:relative;
+    z-index: 100;
+}
+.navbar{
+    background: rgba(255, 255, 255, 0.311); /* Light transparent background */
+    backdrop-filter: blur(20px); /* Blur effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1000;
+    
+}
+.navbar .container-fluid .navbar-brand img{
+    height: 30px;
+    
+}
+#map { 
+    position :absolute;
+    width: 100%;
+    top:6rem;
+    z-index: 99;
+    background-color: black;
+    border-radius: 1rem;
+    border:solid black; 
+    
+ }
+ .action-buttons {
+    margin: 1rem;
+    gap: 0.5rem;
+}
+
+#settings-container {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+    margin-top: 0;
+}
+#weather_info img{
+    height:25px;
+}
+
+#settings-container.show {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+ .search-container {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
+    z-index: 500;
+}
+ .input-wrapper{
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    backdrop-filter: blur(20px); /* Blur effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+ }
+ #suggestions {
+    position:absolute;
+    top:3rem;
+    right: 1px;
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+
+}
+.list-group-item:hover { background: #f8f9fa; cursor: pointer; }
+#location-search{
+    background: url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat 10px center;
+    background-size: 20px;
+    padding-left: 40px;
+    background-color: aliceblue;
+    height: 40px;
+    font-size: 1rem;
+    border: solid black;
+}
+
+#weather-card{
+    position: absolute;
+    top: 55%;
+    left:60%;    
+    width:50%;
+    z-index: 1000;
+}
+#weather-container{
+    position :relative;
+    width: 90%;
+    top:700px;
+    justify-content: center;
+}
+#title-current{
+    position :relative;
+    width: 100%;
+    left:5%;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    backdrop-filter: blur(40px); /* Blur effect */
+}
+
+#weather-forecast{
+    position :absolute;
+    width: 90%;
+    left:10%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    
+ 
+}
+.weather-forecast-card{
+    background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    backdrop-filter: blur(20px); /* Blur effect */
+    border-radius: 15px;
+    padding: 0px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    font-size: medium;
+    z-index: 1;
+    
+}
+
+.weather-forecast-card:hover{
+    background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    backdrop-filter: blur(50px); 
+    transform: translateY(-20px) scale(1.05);
+    box-shadow: 0px 0px 30px rgba(215, 198, 198, 0.4);
+    z-index: 100;
+    transition: 1s;
+    
+}
+
+@media (max-width: 900px) {
+   #weather-card{
+     position:absolute;
+     top: 30%;        
+   }
+   #map{
+    width:100%;
+
+   }
+    
+}
+#title-current{
+    min-height: 200px;
+    
+    
+}
+
+
+
+#title-current .card-body{
+    font-weight: bold;
+    font-size: large;
+}
+#title-current .card-body .card-title{
+    display: flex;    
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#title-current .card-body .card-title h2{
+    min-width: 80px;    
+}
+#title-current .card-body .card-title img{
+    min-height: 50px;
+    min-width:50px;
+    max-height: 200px;
+    max-width:200px;
+}
+.current-weather-detail{
+    display:flex;
+    justify-content: space-between;
+}
+
+.weather-forecast-card .card-body .card-text{
+    display : flex;
+    gap:10px;
+    justify-content: space-between;
+}
+
+
+@media (max-width: 500px) { 
+    .current-weather-detail{
+        display: block;
+    }
+    .forecast-day{
+        display: flex;
+        justify-content: space-between;
+    }
+    #title-current .card-body .card-title{
+        flex-direction: column;
+    }
+    #title-current .card-body .card-title h2{
+        order:3;
+    }
+    #title-current .card-body .card-title h4 {
+        order:1;
+    }
+    #title-current .card-body .card-title  img{
+        order: 2;
+    }  
+    .weather-forecast-card .card-body .card-text{
+        display :block;
+        
+    }
+    .weather-forecast-card .card-body .card-text .time{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+   
+}
+
+
+

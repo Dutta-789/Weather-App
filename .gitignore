@@ -1,0 +1,11 @@
+# Backend ignores
+backend/node_modules/
+backend/.env
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+temp/

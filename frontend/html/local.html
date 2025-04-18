@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Update</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="../css/local.css">
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <a class="navbar-brand imp_click" href="../html/local.html"><img src="../assets/icon_images/cloudy (2).png"> Local Weather</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active imp_click" aria-current="page" href="../index.html" title="Home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link imp_click" href="../html/find.html" title="Search the location of your choice and check their weather">Search Location</a>
+              </li>
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown link
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item imp_click" href="../index.html" title="Home">Home</a></li>
+                  <li><a class="dropdown-item imp_click" href="../html/find.html" title="Search the location of your choice and check their weather">Search Location</a></li>
+                  
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <main class="mt-2 m-2 ">
+        <div class="card" id="title-current" >
+            
+          <div class="card-body text-center">
+            
+            <div class="card-title">  
+
+              <img src="https://cdn.weatherapi.com/weather/64x64/day/116.png" id="title_weather_icon" alt="city weather icon">
+              <h2> 60 °C</h2>
+              <h4>Card title</h4>
+            </div>
+            <button class="btn btn-primary mb-3" id="getWeatherUpdate">Get Location</button>
+            <div class="alert alert-info"> 
+                  <div id="weather_info">Information</div>
+                  <!-- Action Buttons -->
+                      <div class="action-buttons">
+                        <!-- Copy -->
+                        <button id="copy-btn" class="btn btn-outline-dark rounded-circle icon-btn" title="Copy Text">
+                          <i class="fas fa-copy"></i>
+                        </button>
+                        <!-- Mic -->
+                        <button id="mic-btn" class="btn btn-outline-dark rounded-circle icon-btn" title="Speak">
+                          <i class="fas fa-microphone"></i>
+                        </button>
+                        <!-- Settings -->
+                        <button id="settings-btn" class="btn btn-outline-dark rounded-circle icon-btn" title="Settings">
+                          <i class="fas fa-cog"></i>
+                        </button>
+                      </div>
+                  <!-- Hidden Settings -->
+                  <div id="settings-container">
+                    <div id="settings-card">
+                      <label for="voiceSelect" class="form-label">Choose Voice:</label>
+                      <select id="voiceSelect" class="form-select"></select>
+                    </div>
+                  </div>
+            </div>
+            <div class="alert alert-info " id="location">
+                Click the button to get your coordinates
+            </div>
+            
+            <div class="detail">
+              <div class="current-weather-detail">
+                <div class="forecast-day" id="feel_Like">
+                  <p><strong><i class="fa-solid fa-temperature-three-quarters"></i> Feels Like</strong></p>                  
+                  <p class="update">77 °C</p>
+                </div>
+                <div class="forecast-day" id="wind_speed">
+                    <p><strong><i class="fa-solid fa-wind"></i> Wind Speed</strong></p>
+                    
+                    <p class="update">6 Kph</p>
+                </div>
+                <div class="forecast-day" id="precip">
+                    <p><strong><i class="fa-solid fa-cloud"></i> Precipitation</strong></p>
+                    
+                    <p class="update">80 mm</p>
+                </div>
+                <div class="forecast-day" id="humidity">
+                    <p><strong><i class="fa-solid fa-water"></i> Humidity</strong></p>                    
+                    <p class="update">81 %</p>
+                </div>
+              </div>
+            </div>
+                     
+          </div>
+        </div>
+
+        <div id="weather-forecast" class="container  d-flex justify-content-center">
+          <section >
+            
+              
+              <div class="card weather-forecast-card"  id="first-weather-status">
+                
+                <div class="card-body">
+                  <h2 class="card-title">Today</h2>
+                  <div class="card-text">
+                     <div class="time">
+                      <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                      <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                      <p>00:00 hr</p>
+                     </div>
+                     <div class="time">
+                      <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                       <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</h3>
+                      <p>06:00 hr</p>
+                     </div>
+                     <div class="time">
+                      <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                      <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                      <p>12:00 hr</p>
+                     </div>
+                     <div class="time">
+                      <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                      <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                      <p>18:00 hr</p>
+                     </div> 
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="card weather-forecast-card"  id="second-weather-status">
+                
+                <div class="card-body">
+                  <h2 class="card-title">Tomorrow</h2>
+                  <div class="card-text">
+                    <div class="time">
+                     <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                     <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                     <p>00:00 hr</p>
+                    </div>
+                    <div class="time">
+                     <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                     <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</h3>
+                     <p>06:00 hr</p>
+                    </div>
+                    <div class="time">
+                     <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                     <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                     <p>12:00 hr</p>
+                    </div>
+                    <div class="time">
+                     <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                     <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                     <p>18:00 hr</p>
+                    </div> 
+                 </div>                    
+                </div>
+              </div>
+              <div class="card weather-forecast-card"  id="third-weather-status">
+                
+                <div class="card-body">
+                  <h2 class="card-title">Days after Tomorrow</h2>
+                  <div class="card-text">
+                    <div class="time">
+                     <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                     <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                     <p>00:00 hr</p>
+                    </div>
+                    <div class="time">
+                     <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                     <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</h3>
+                     <p>06:00 hr</p>
+                    </div>
+                    <div class="time">
+                     <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                     <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                     <p>12:00 hr</p>
+                    </div>
+                    <div class="time">
+                     <img src="https://cdn.weatherapi.com/weather/64x64/night/143.png">
+                     <p class="update"><i class="fa-solid fa-temperature-three-quarters"></i> 12 °C</p>
+                     <p>18:00 hr</p>
+                    </div> 
+                 </div>                    
+                </div>
+              </div>
+            </section>
+          </div>
+      </main>
+    <script src="../script/reload.js"></script>
+    <script src="../script/local.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  </body>
+</html>

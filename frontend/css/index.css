@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Monda:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+*{
+    font-family: "Monda", sans-serif;
+}
+body{
+    
+    background: url('../assets/icon_images/background_index.jpg') no-repeat center center fixed;
+    background-size: cover;  /* Ensures the image covers the full screen */
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+body.fade-out {
+    opacity: 0;
+}
+.nav{
+    align-self: start;
+}
+.navbar{
+    background: rgba(255, 255, 255, 0.311); /* Light transparent background */
+    backdrop-filter: blur(20px); /* Blur effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1000;   
+}
+.navbar .container-fluid .navbar-brand img{
+    height: 30px;
+    
+}
+
+main{
+    display:grid;
+    position:relative;
+    top:20%;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.full-screen-section {
+    height: 80vh;
+}
+.card-custom {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    backdrop-filter: blur(40px); /* Blur effect */
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+.box_wrapper{
+    display: flex;
+    gap:10px;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    /* padding: 0 !important; */
+}
+.message{
+    overflow: hidden;
+    height: 50vh;
+}
+.go_to{
+    overflow: hidden;
+}
+#first_container .row .col_1 .card,
+#second_container .row .col_2 .card{
+    transition: 1s;
+    height: max-content;
+}
+#first_container .row .col_1 .card .card-body .card-title,
+#second_container .row .col_2 .card .card-body .card-title
+{
+    display: flex;
+    gap:10px;
+    align-items: center;
+}
+
+#first_container .row .col_1 .card .card-body .card-title h5,
+#first_container .row .col_2 .card .card-body .card-title ,
+#second_container .row .col_2 .card .card-body .card-title h5,
+#second_container .row .col_1 .card .card-body .card-title
+{
+    font-size: xx-large;
+}
+#first_container .row .col_1 .card .card-body .card-text,
+#first_container .row .col_2 .card .card-body .card-text ,
+#second_container .row .col_2 .card .card-body .card-text,
+#second_container .row .col_1 .card .card-body .card-text{
+    font-size: large;
+}
+#first_container .row .col_1 .card .card-body .card-title img, 
+#second_container .row .col_2 .card .card-body .card-title img{ 
+    height:30px;
+}
+#first_container .row .col_1 .card .card-body .card-text img,
+#second_container .row .col_2 .card .card-body .card-text img{
+    height:20px;
+}
+#first_container .row .col_2 .card .card-body,
+#second_container .row .col_1 .card .card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+}
+#first_container .row .col_2 .card .card-body img,
+#second_container .row .col_1 .card .card-body img{
+    height:100px;
+    
+} 
+#first_container .row .col_1 .card:hover,
+#second_container .row .col_2 .card:hover{
+    background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    backdrop-filter: blur(20px); 
+    transform: translateY(-20px) scale(1.05);
+    box-shadow: 0px 0px 10px rgba(113, 113, 113, 0.489);
+    z-index: 100;
+    transition: 1s;
+}
+
+
+
+@media (max-width: 600px) {
+    .full-screen-section{
+        height: 90vh;
+    }
+    #first_container{
+        display:flex;
+
+    }  
+    #first_container .row .col_1{
+        order:2;
+    }
+    #first_container .row .col_2{
+        order:1;
+    }
+    #first_container .row .col_1 .card .card-body .card-title h5,
+    #first_container .row .col_2 .card .card-body .card-title ,
+    #second_container .row .col_2 .card .card-body .card-title h5,
+    #second_container .row .col_1 .card .card-body .card-title
+    {
+    font-size: x-large;
+    }
+    #first_container .row .col_1 .card .card-body .card-text,
+    #first_container .row .col_2 .card .card-body .card-text ,
+    #second_container .row .col_2 .card .card-body .card-text,
+    #second_container .row .col_1 .card .card-body .card-text{
+    font-size: medium;
+    }
+    #first_container{
+        margin-top: 2rem;
+    }
+
+    
+}
