@@ -13,12 +13,11 @@ body{
     background: url('../assets/icon_images/cloudy_weather.jpg.jpg') no-repeat center center fixed;
     background-size: cover;  /* Ensures the image covers the full screen */
     transition: background-image 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    opacity: 1;
-    
+    opacity: 0;    
     transition: opacity 0.5s ease;
 }
-body.fade-out {
-    opacity: 0;
+.fade-in {
+    opacity: 1;
 }
 main{
     position:relative;
@@ -35,6 +34,10 @@ main{
 .navbar .container-fluid .navbar-brand img{
     height: 30px;
     
+}
+#loading .spinner-border{
+    height:10rem;
+    width:10rem;
 }
 #map { 
     position :absolute;

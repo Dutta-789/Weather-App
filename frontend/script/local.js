@@ -1,8 +1,7 @@
 window.onload = function() {
+  document.body.classList.add('fade-in');
   window.scrollTo(0, 0);
 };
-
-
 
 const synth = window.speechSynthesis;
 const locationDiv = document.querySelector("#location");
@@ -63,18 +62,23 @@ settingsBtn.addEventListener('click', () => {
 });
 
 
-async function setBackgroundImage(keyword) {
+async function setBackgroundImage(keyword,msg) {
   try {
     const response = await fetch(`https://weather-app-cf6d.onrender.com/image?query=${encodeURIComponent(keyword)}`);
     const data = await response.json();
 
     if (data.hits && data.hits.length > 0) {
-      const imageUrl = data.hits[0].largeImageURL;
-      document.body.style.opacity = 0;
+      const imageUrl = data.hits[0].largeImageURL;     
+      document.body.classList.remove('fade-in');
+      
       setTimeout(() => {
+        document.body.classList.add('fade-in');
         document.body.style.backgroundImage = `url(${imageUrl})`;
-        document.body.style.opacity = 1;
-      }, 250);
+        locationDiv.classList.replace('alert-info', 'alert-success');
+        locationDiv.innerHTML=msg;
+        update();
+        
+      }, 500);
       
     } else {
       console.log("No images found for this keyword.");
@@ -130,19 +134,44 @@ function currentWeather(current){
       message += "😎 It’s a good day to be outside!";
     } else if (current.condition.text.includes("snow")) {
       message += "❄️ Stay warm, it might be slippery outside!";
-    } else if (current.humidity> 80) {
+    } 
+    if (current.humidity>= 80) {
       message += "💧 It's quite humid, stay hydrated!";
-    } else if (current.humidity< 80  || current.humidity>=30) {
-      message += "😎 It will be a nice day!!";
+    } else if (current.humidity< 80  && current.humidity>=60) {
+      message += " 😓 Feels sticky or muggy !!";
+    }else if(current.humidity< 60  && current.humidity>=30){
+      message += "🤏 Slightly humid, still okay";  
     } else if (current.humidity<30) {
       message += "🌬️ It is a Dry day!!, Be sure to moisture yourself!";
     }
 
+    if (current.feelslike_c<=0) {
+      message += "❄️ Damn its too cold";
+    } else if (current.feelslike_c>0 && current.feelslike_c<=10) {
+      message += "🧥 Chilly, need a jacket!";
+    } else if (current.feelslike_c>10 && current.feelslike_c<=20) {
+      message += "🌬️ Light jacket weather, fresh air!";
+    } else if (current.feelslike_c>20 && current.feelslike_c<=25) {
+      message += "😊 Comfortable, ideal weather, touch some grass!";
+    }else if (current.feelslike_c>25 && current.feelslike_c<=30) {
+      message += "🌤️	Slightly hot, good for outings!";
+    }else if (current.feelslike_c>30 && current.feelslike_c<=35) {
+      message += "🔥 Feels hot, may sweat!";
+    }else if (current.feelslike_c>35 && current.feelslike_c<=40) {
+      message += "🥵 Risk of heat stress, uncomfortable!";
+    } else if (current.feelslike_c>40) {
+      message += "🌋 Dangerous, heatwave, stay indoors Bro!";
+    }
+
   const information=document.querySelector("#weather_info");
   information.innerHTML=message;
-  setBackgroundImage(current.condition.text);
 }
 
+function update(){
+    document.querySelector("#info_about_weather").classList.remove('d-none');
+    document.querySelector(".detail").classList.remove('d-none');
+    document.querySelector("#weather-forecast").classList.remove('d-none');
+}
 
 function getLocation() {
   if(locationDiv.classList.contains('alert-success') || locationDiv.classList.contains('alert-danger')){
@@ -151,7 +180,12 @@ function getLocation() {
   }
     
     if (navigator.geolocation) {
-      locationDiv.innerHTML = "Getting location...";
+      locationDiv.innerHTML = `<div>
+                                      <div class="spinner-border text-success" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                      </div>
+                              </div>
+                                Getting location...`;
       navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
       locationDiv.classList.replace('alert-info', 'alert-danger');
@@ -166,28 +200,30 @@ function getLocation() {
       locationDiv.classList.replace('alert-success', 'alert-info');
       locationDiv.classList.replace('alert-danger', 'alert-info');
     }
-    locationDiv.classList.replace('alert-info', 'alert-success');
-    locationDiv.innerHTML = `
+    
+     let msg = `
       <strong>Latitude:</strong> ${lat} <br>
       <strong>Longitude:</strong> ${lon}
     `;
     try{
       const weather=await fetch(`https://weather-app-cf6d.onrender.com/weather?lat=${lat}&lon=${lon}`);
       const data=await weather.json();
-      currentWeather(data.current);
-      location_name(data.location);
-      forecastWeather(data.forecast.forecastday);
+      
+     
+      setTimeout(() => {
+        currentWeather(data.current);
+        location_name(data.location);
+        forecastWeather(data.forecast.forecastday);
+        
+      },250);
+      setBackgroundImage(data.current.condition.text,msg);
       
     }
     catch(error){
       locationDiv.classList.replace('alert-success', 'alert-danger');
       locationDiv.innerHTML = "Try Again Later";
-
       document.querySelector("#weather_info").style.display = "none";
-
-    }
-    
-    
+    }    
   }
 
   function showError(error) {

@@ -1,6 +1,9 @@
-window.onload = function() {
-    window.scrollTo(0, 0);
-  };
+window.addEventListener("load", () => {
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  });
+  document.body.classList.add("fade-in");
+});
 
 
 const synth = window.speechSynthesis;
@@ -26,7 +29,11 @@ L.tileLayer(`https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=zVdHWEDjL
     }).addTo(map);
   
 let marker;
+function update(){
+      document.querySelector("#weather-container").classList.remove("d-none");
+      document.querySelector("#weather-forecast").classList.remove("d-none");
 
+}
 
 location_search.addEventListener("input",getLocation);
 
@@ -104,11 +111,12 @@ async function setBackgroundImage(keyword) {
   
       if (data.hits && data.hits.length > 0) {
         const imageUrl = data.hits[0].largeImageURL;
-        document.body.style.opacity = 0;
+        document.body.classList.remove('fade-in');  
         setTimeout(() => {
           document.body.style.backgroundImage = `url(${imageUrl})`;
-          document.body.style.opacity = 1;
-        }, 250);
+          document.body.classList.add('fade-in');
+          update();
+        }, 500);
         
       } else {
         console.log("No images found for this keyword.");
@@ -122,20 +130,41 @@ async function setBackgroundImage(keyword) {
 //getting location coordinates in the MAP
 async function getLocation(){
     const query = location_search.value;
-    if (query.length < 3) return;              
-    const response = await axios.get(`https://weather-app-cf6d.onrender.com/map?query=${query}`);
-    const results = response.data.features;   
-    suggestions.innerHTML="";              
-    results.forEach(result => 
-    {
-        let li = document.createElement("li");
-        li.textContent = result.place_name;
-        li.classList.add("list-group-item");
-        li.addEventListener("click", async() =>{
-            await getWeather(result);
-        });
-        suggestions.appendChild(li);
-    });
+    if (query.length < 3) return;
+    suggestions.innerHTML = `
+                                <li class="list-group-item d-flex align-items-center">
+                                  <div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>
+                                  Loading...
+                                </li>
+                            `; 
+    try{
+      const response = await axios.get(`https://weather-app-cf6d.onrender.com/map?query=${query}`);
+      const results = response.data.features;   
+      suggestions.innerHTML="";              
+      results.forEach(result => 
+      {
+          let li = document.createElement("li");
+          li.textContent = result.place_name;
+          li.classList.add("list-group-item");
+          li.addEventListener("click", async() =>{
+              await getWeather(result);
+          });
+          suggestions.appendChild(li);
+      });
+      if (results.length === 0) {
+        suggestions.innerHTML = `
+          <li class="list-group-item text-muted">No results found</li>
+        `;
+      }
+
+    } 
+    catch (err) {
+      suggestions.innerHTML = `
+                              <li class="list-group-item text-danger">Failed to load data</li>
+                              `;
+      console.error(err);
+    }                                    
+    
 }
 //getting location weather
 async function getWeather(result){
@@ -195,13 +224,36 @@ async function getWeather(result){
         message += "😎 It’s a good day to be outside!";
       } else if (data.current.condition.text.includes("snow")) {
         message += "❄️ Stay warm, it might be slippery outside!";
-      } else if (data.current.humidity> 80) {
+      }
+
+      if (data.current.humidity>= 80) {
         message += "💧 It's quite humid, stay hydrated!";
-      } else if (data.current.humidity< 80  || data.current.humidity>=30) {
-        message += "😎 It will be a nice day!!";
+      } else if (data.current.humidity< 80  && data.current.humidity>=60) {
+        message += " 😓 Feels sticky or muggy !!";
+      }else if(data.current.humidity< 60  && data.current.humidity>=30){
+        message += "🤏 Slightly humid, still okay";  
       } else if (data.current.humidity<30) {
         message += "🌬️ It is a Dry day!!, Be sure to moisture yourself!";
       }
+
+      if (data.current.feelslike_c<=0) {
+        message += "❄️ Damn its too cold";
+      } else if (data.current.feelslike_c>0 && data.current.feelslike_c<=10) {
+        message += "🧥 Chilly, need a jacket!";
+      } else if (data.current.feelslike_c>10 && data.current.feelslike_c<=20) {
+        message += "🌬️ Light jacket weather, fresh air!";
+      } else if (data.current.feelslike_c>20 && data.current.feelslike_c<=25) {
+        message += "😊 Comfortable, ideal weather, touch some grass!";
+      }else if (data.current.feelslike_c>25 && data.current.feelslike_c<=30) {
+        message += "🌤️	Slightly hot, good for outings!";
+      }else if (data.current.feelslike_c>30 && data.current.feelslike_c<=35) {
+        message += "🔥 Feels hot, may sweat!";
+      }else if (data.current.feelslike_c>35 && data.current.feelslike_c<=40) {
+        message += "🥵 Risk of heat stress, uncomfortable!";
+      } else if (data.current.feelslike_c>40) {
+        message += "🌋 Dangerous, heatwave, stay indoors Bro!";
+      }
+      
       const information=document.querySelector("#weather_info");
       information.innerHTML=message;
       setBackgroundImage(data.current.condition.text);
@@ -212,8 +264,7 @@ async function getWeather(result){
       }) // Adjusts the width dynamically
       marker.openPopup();
     }
-    catch(error){
-      
+    catch(error){   
 
       document.querySelector("#weather_info").style.display = "none";
 

@@ -7,12 +7,12 @@ body{
     
     background: url('../assets/icon_images/background_index.jpg') no-repeat center center fixed;
     background-size: cover;  /* Ensures the image covers the full screen */
-    opacity: 1;
-    transition: opacity 0.5s ease;
+    opacity: 0;
+    transition: opacity 0.5s ease;   
 }
 
-body.fade-out {
-    opacity: 0;
+.fade-in {
+    opacity: 1;
 }
 .nav{
     align-self: start;
@@ -28,6 +28,15 @@ body.fade-out {
     height: 30px;
     
 }
+#loading{
+    position: fixed;
+    top:50%;
+    left:45%;
+}
+#loading .spinner-border{
+    height:10rem;
+    width:10rem;
+}
 
 main{
     display:grid;
@@ -36,7 +45,8 @@ main{
     z-index: 100;
     justify-content: center;
     align-items: center;
-
+    opacity: 1;
+    transition: opacity 1s ease;
 }
 
 .full-screen-section {

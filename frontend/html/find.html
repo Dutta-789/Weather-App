@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <link rel="icon" type="image/png" href="../assets/icon_images/map.png">
+
 </head>
   <body class="bg-light">
     <nav class="navbar navbar-expand-lg ">
@@ -42,6 +43,11 @@
         </div>
       </div>
     </nav>
+    <div id="loading" class="position-fixed top-50 start-50 translate-middle text-center d-none " >
+      <div class="spinner-border text-primary" role="status" >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
     <main class="m-0">    
         <div class="container d-flex justify-content-center align-items-center mx-auto mt-3">
             <div class="search-container ">
@@ -61,7 +67,7 @@
         </div>
 
 
-        <div id="weather-container" >
+        <div id="weather-container" class="d-none">
           <div class="card" id="title-current" >
             
             <div class="card-body text-center">
@@ -120,7 +126,7 @@
             </div>
           </div>
 
-          <div id="weather-forecast" class="container  d-flex justify-content-center">
+          <div id="weather-forecast" class="container d-flex justify-content-center d-none">
             <section >
               
                 

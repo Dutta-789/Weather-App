@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (link.href && !link.href.startsWith("#") && !link.target) {
         link.addEventListener("click", function (e) {
           e.preventDefault();
-          document.body.classList.add("fade-out");
+          document.querySelector("#loading").classList.remove("d-none");
+          document.querySelector("main").classList.add("d-none");
           setTimeout(() => {
             window.location.href = this.href;
           }, 200); // match with CSS transition time

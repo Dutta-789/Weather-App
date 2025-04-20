@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="../css/local.css">
+    <link rel="icon" type="image/png" href="../assets/icon_images/placeholder.png">
 </head>
   <body>
     <nav class="navbar navbar-expand-lg ">
@@ -39,6 +40,11 @@
           </div>
         </div>
       </nav>
+      <div id="loading" class="position-fixed top-50 start-50 translate-middle text-center d-none " >
+        <div class="spinner-border text-primary" role="status" >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
       <main class="mt-2 m-2 ">
         <div class="card" id="title-current" >
             
@@ -47,11 +53,11 @@
             <div class="card-title">  
 
               <img src="https://cdn.weatherapi.com/weather/64x64/day/116.png" id="title_weather_icon" alt="city weather icon">
-              <h2> 60 °C</h2>
-              <h4>Card title</h4>
+              <h2> </h2>
+              <h4>Check The Weather</h4>
             </div>
             <button class="btn btn-primary mb-3" id="getWeatherUpdate">Get Location</button>
-            <div class="alert alert-info"> 
+            <div id="info_about_weather" class="alert alert-info d-none"> 
                   <div id="weather_info">Information</div>
                   <!-- Action Buttons -->
                       <div class="action-buttons">
@@ -77,10 +83,11 @@
                   </div>
             </div>
             <div class="alert alert-info " id="location">
-                Click the button to get your coordinates
+               
+              Click the button to get your coordinates
             </div>
             
-            <div class="detail">
+            <div class="detail d-none">
               <div class="current-weather-detail">
                 <div class="forecast-day" id="feel_Like">
                   <p><strong><i class="fa-solid fa-temperature-three-quarters"></i> Feels Like</strong></p>                  
@@ -106,7 +113,7 @@
           </div>
         </div>
 
-        <div id="weather-forecast" class="container  d-flex justify-content-center">
+        <div id="weather-forecast" class="container  d-flex justify-content-center d-none">
           <section >
             
               
